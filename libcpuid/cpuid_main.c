@@ -294,11 +294,15 @@ static int cpuid_basic_identify(struct cpu_raw_data_t* raw, struct cpu_id_t* dat
 		data->stepping = raw->basic_cpuid[1][0] & 0xf;
 		xmodel = (raw->basic_cpuid[1][0] >> 16) & 0xf;
 		xfamily = (raw->basic_cpuid[1][0] >> 20) & 0xff;
-		if (data->vendor == VENDOR_AMD && data->family < 0xf)
-			data->ext_family = data->family;
-		else
+		if ((data->vendor == VENDOR_AMD || data->vendor == VENDOR_INTEL) && data->family == 0xf)
 			data->ext_family = data->family + xfamily;
-		data->ext_model = data->model + (xmodel << 4);
+		else
+			data->ext_family = data->family;
+		if ((data->vendor == VENDOR_AMD && data->family == 0xf) ||
+			(data->vendor == VENDOR_INTEL && (data->family == 0x6 || data->family == 0xf)))
+			data->ext_model = data->model + (xmodel << 4);
+		else
+			data->ext_model = data->model;
 	}
 	ext = raw->ext_cpuid[0][0] - 0x8000000;
 	
