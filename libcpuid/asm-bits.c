@@ -175,7 +175,7 @@ void cpu_rdtsc(uint64_t* result)
 {
 	uint32_t low_part, hi_part;
 #ifdef COMPILER_GCC
-#ifdef PLATFORM_X64_ARM
+#ifdef PLATFORM_ARM
   low_part = 0;
   hi_part = 0;
 #else
@@ -210,7 +210,7 @@ void busy_sse_loop(int cycles)
 #else
 #	define XALIGN ".align 4\n"
 #endif
-#ifdef PLATFORM_X64_ARM
+#ifdef PLATFORM_ARM
 #else
 	__asm __volatile (
 		"	xorps	%%xmm0,	%%xmm0\n"
