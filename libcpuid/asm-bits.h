@@ -49,9 +49,7 @@
 #endif
 
 int cpuid_exists_by_eflags(void);
-#ifdef INLINE_ASM_SUPPORTED
 void exec_cpuid(uint32_t *regs);
 void busy_sse_loop(int cycles);
-#endif
 
 #endif /* __ASM_BITS_H__ */
