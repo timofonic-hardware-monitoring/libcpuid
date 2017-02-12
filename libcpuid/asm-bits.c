@@ -109,7 +109,7 @@ void exec_cpuid(uint32_t *regs)
 		:"m"(regs)
 		:"memory", "eax", "rdi"
 	);
-#	else
+#	elif defined(PLATFORM_X86)
 	__asm __volatile(
 		"	mov	%0,	%%edi\n"
 
@@ -135,6 +135,7 @@ void exec_cpuid(uint32_t *regs)
 		:"m"(regs)
 		:"memory", "eax", "edi"
 	);
+#	elif defined(PLATFORM_ARM)
 #	endif /* COMPILER_GCC */
 #else
 #  ifdef COMPILER_MICROSOFT
