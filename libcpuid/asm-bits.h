@@ -39,6 +39,8 @@
 #	define PLATFORM_X64
 #elif defined(__i386__) || defined(_M_IX86)
 #	define PLATFORM_X86
+#elif defined(__ARMEL__)
+#	define PLATFORM_ARM
 #endif
 
 /* Under Windows/AMD64 with MSVC, inline assembly isn't supported */
@@ -47,7 +49,9 @@
 #endif
 
 int cpuid_exists_by_eflags(void);
+#ifdef INLINE_ASM_SUPPORTED
 void exec_cpuid(uint32_t *regs);
 void busy_sse_loop(int cycles);
+#endif
 
 #endif /* __ASM_BITS_H__ */
