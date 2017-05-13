@@ -27,24 +27,8 @@
 #define __ASM_BITS_H__
 #include "libcpuid.h"
 
-/* Determine Compiler: */
-#if defined(_MSC_VER)
-#	define COMPILER_MICROSOFT
-#elif defined(__GNUC__)
-#	define COMPILER_GCC
-#endif
-
-/* Determine Platform */
-#if defined(__x86_64__) || defined(_M_AMD64)
-#	define PLATFORM_X64
-#elif defined(__i386__) || defined(_M_IX86)
-#	define PLATFORM_X86
-#elif defined(__ARMEL__)
-#	define PLATFORM_ARM
-#endif
-
 /* Under Windows/AMD64 with MSVC, inline assembly isn't supported */
-#if (defined(COMPILER_GCC) && defined(PLATFORM_X64)) || defined(PLATFORM_X86) || defined(PLATFORM_ARM)
+#if (defined(COMPILER_GCC) && defined(PLATFORM_X86_64)) || defined(PLATFORM_I386) || defined(PLATFORM_ARM)
 #	define INLINE_ASM_SUPPORTED
 #endif
 
