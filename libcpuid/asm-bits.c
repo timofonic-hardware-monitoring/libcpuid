@@ -82,7 +82,7 @@ int cpuid_exists_by_eflags(void)
  */
 void exec_cpuid(uint32_t *regs)
 {
-#ifdef COMPILER_GCC
+#if defined(COMPILER_GCC) || defined(COMPILER_CLANG)
 #	ifdef PLATFORM_X64
 	__asm __volatile(
 		"	mov	%0,	%%rdi\n"
@@ -174,7 +174,7 @@ void exec_cpuid(uint32_t *regs)
 void cpu_rdtsc(uint64_t* result)
 {
 	uint32_t low_part, hi_part;
-#ifdef COMPILER_GCC
+#if defined(COMPILER_GCC) || defined(COMPILER_CLANG)
 #ifdef PLATFORM_ARM
   low_part = 0;
   hi_part = 0;
@@ -204,7 +204,7 @@ void cpu_rdtsc(uint64_t* result)
 #ifdef INLINE_ASM_SUPPORTED
 void busy_sse_loop(int cycles)
 {
-#ifdef COMPILER_GCC
+#if defined(COMPILER_GCC) || defined(COMPILER_CLANG)
 #ifndef __APPLE__
 #	define XALIGN ".balign 16\n"
 #else

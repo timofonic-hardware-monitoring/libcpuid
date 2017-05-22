@@ -28,7 +28,7 @@
 #include "libcpuid.h"
 
 /* Under Windows/AMD64 with MSVC, inline assembly isn't supported */
-#if (defined(COMPILER_GCC) && defined(PLATFORM_X86_64)) || defined(PLATFORM_I386) || defined(PLATFORM_ARM)
+#if ((defined(COMPILER_GCC) || defined(COMPILER_CLANG)) && defined(PLATFORM_X86_64)) || defined(PLATFORM_I386) || defined(PLATFORM_ARM)
 #	define INLINE_ASM_SUPPORTED
 #endif
 
