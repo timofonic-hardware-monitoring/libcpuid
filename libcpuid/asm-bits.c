@@ -32,7 +32,7 @@ int cpuid_exists_by_eflags(void)
 #if defined(PLATFORM_X64)
 	return 1; /* CPUID is always present on the x86_64 */
 #elif defined(PLATFORM_X86)
-#  if defined(COMPILER_GCC)
+#  if defined(COMPILER_GCC) || defined(COMPILER_CLANG)
 	int result;
 	__asm __volatile(
 		"	pushfl\n"
@@ -70,6 +70,8 @@ int cpuid_exists_by_eflags(void)
 #  else
 	return 0;
 #  endif /* COMPILER_MICROSOFT */
+#elif defined(PLATFORM_ARM)
+  return 0;
 #else
 	return 0;
 #endif /* PLATFORM_X86 */
